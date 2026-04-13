@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Letter Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <h1 class="mb-4">Player Letter Generator</h1>
+
+  <a href="index.html">
+    <button class="button">Back</button>
+  </a>
+
+  <div id="results" class="mt-4"></div>
+
+  <script src="script.js"></script>
+  <script>
+    const results = document.getElementById('results');
+    results.innerHTML = '<h2>Results</h2>';
+
+    const storedPlayers = JSON.parse(localStorage.getItem('players'));
+
+    if (storedPlayers && storedPlayers.length > 0) {
+      storedPlayers.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<strong>${p.name}</strong>: <span class="letter">${p.letter}</span>`;
+        results.appendChild(card);
+      });
+    } else {
+      results.innerHTML += '<p>No player data found. Please go back and generate letters.</p>';
+    }
+  </script>
+</body>
+</html>
